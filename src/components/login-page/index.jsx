@@ -21,6 +21,8 @@ function LoginPage() {
         setisLoading(true);
         setTimeout(() => {
             alert(`Logged in successfully!\nEmail: ${email}`);
+             setEmail('');
+             setPassword('');
             setisLoading(false);
         }, 2000);
     }
@@ -38,8 +40,7 @@ function LoginPage() {
                     </div>
                     <div className="col-span-12 md:col-span-6 mt-30">
                         <div className="mx-auto items-center justify-center w-full max-w-md bg-white rounded-lg  p-6">
-                            <div className="flex mb-6 rounded-md p-1 overflow-hidden bg-[#EBEDF0]
-">
+                            <div className="flex mb-6 rounded-md p-1 overflow-hidden bg-[#EBEDF0]">
                                 <button className="w-1/2 py-2 text-base font-normal bg-white font-Open_Sans">
                                     Login
                                 </button>
