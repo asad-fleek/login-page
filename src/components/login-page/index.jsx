@@ -1,31 +1,34 @@
 import React, { useState } from 'react'
 import { backgroundimage } from '../../utils/images';
-import { LoaderCircle } from 'lucide-react';
-import { EyeOff, Eye } from 'lucide-react';
+import { LoaderCircle,  EyeOff, Eye } from 'lucide-react';
+import { MyAuth } from "../../context/index";
+import { useNavigate } from "react-router-dom";
+
 
 function LoginPage() {
+    const { login } = MyAuth();
+    const navigate = useNavigate(); 
     const [isLoading, setisLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+     const handleLogin = () => {
+     if (!email || !password) {
+    alert("Please enter email and password");
+    return;
+  }
 
-    const handleLogin = () => {
-        const loginData = {
-            email: email,
-            password: password,
-        };
+  setisLoading(true);
 
-        console.log('Login data:', loginData);
+  setTimeout(() => {
+    login(email, password);   
+    setisLoading(false);
+    navigate("/profile");     
+  }, 2000);
+};
 
-        setisLoading(true);
-        setTimeout(() => {
-            alert(`Logged in successfully!\nEmail: ${email}`);
-             setEmail('');
-             setPassword('');
-            setisLoading(false);
-        }, 2000);
-    }
+   
 
     return (
         <>
