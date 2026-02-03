@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { backgroundimage } from '../../utils/images';
-import { LoaderCircle, EyeOff, Eye } from 'lucide-react';
+import { LoaderCircle,  EyeOff, Eye } from 'lucide-react';
 import { MyAuth } from "../../context/index";
 import { useNavigate } from "react-router-dom";
 
 
 function LoginPage() {
     const { login } = MyAuth();
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
     const [activeTab, setActiveTab] = useState('login');
     const [isLoading, setisLoading] = useState(false);
     const [email, setEmail] = useState('');
@@ -22,22 +22,22 @@ function LoginPage() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [agreeToTerms, setAgreeToTerms] = useState(false);
 
-    const handleLogin = () => {
-        if (!email || !password) {
-            alert("Please enter email and password");
-            return;
-        }
+     const handleLogin = () => {
+     if (!email || !password) {
+    alert("Please enter email and password");
+    return;
+  }
 
-        setisLoading(true);
+  setisLoading(true);
 
-        setTimeout(() => {
-            login(email, password);
-            setisLoading(false);
-            navigate("/profile");
-        }, 2000);
-    };
+  setTimeout(() => {
+    login(email, password);   
+    setisLoading(false);
+    navigate("/profile");     
+  }, 2000);
+}; 
 
-    const handleRegister = () => {
+   const handleRegister = () => {
         if (!registerName || !registerEmail || !registerPassword || !confirmPassword) {
             alert("Please fill in all fields");
             return;
@@ -56,14 +56,14 @@ function LoginPage() {
         setisLoading(true);
 
         setTimeout(() => {
-
+            
             alert(`Registration successful!\nName: ${registerName}\nEmail: ${registerEmail}`);
             setisLoading(false);
-
+            
             setActiveTab('login');
         }, 2000);
     };
-
+ 
 
     return (
         <>
@@ -74,28 +74,30 @@ function LoginPage() {
                             <img src={backgroundimage} alt="bg-imge" className='w-full object-cover h-screen' />
                         </div>
                     </div>
-
+                    
                     <div className="col-span-12 md:col-span-6 flex items-center justify-center p-6">
                         <div className="w-full max-w-md bg-white rounded-lg p-6">
-
+                            
                             <div className="flex mb-6 rounded-md p-1 overflow-hidden bg-[#EBEDF0]">
                                 <button
                                     onClick={() => setActiveTab('login')}
-                                    className={`w-1/2 py-2 text-base font-normal font-Open_Sans transition-all ${activeTab === 'login' ? 'bg-white' : 'bg-transparent'
-                                        }`}
+                                    className={`w-1/2 py-2 text-base font-normal font-Open_Sans transition-all ${
+                                        activeTab === 'login' ? 'bg-white' : 'bg-transparent'
+                                    }`}
                                 >
                                     Login
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('register')}
-                                    className={`w-1/2 py-2 text-base font-normal font-Open_Sans transition-all ${activeTab === 'register' ? 'bg-white' : 'bg-transparent'
-                                        }`}
+                                    className={`w-1/2 py-2 text-base font-normal font-Open_Sans transition-all ${
+                                        activeTab === 'register' ? 'bg-white' : 'bg-transparent'
+                                    }`}
                                 >
                                     Register
                                 </button>
                             </div>
 
-
+                           
                             {activeTab === 'login' && (
                                 <div className="animate-fadeIn">
                                     <h2 className="text-xl font-bold font-Open_Sans mb-6 text-[#08090C] font-Inter">
@@ -160,7 +162,7 @@ function LoginPage() {
                                 </div>
                             )}
 
-
+                            
                             {activeTab === 'register' && (
                                 <div className="animate-fadeIn">
                                     <h2 className="text-xl font-bold font-Open_Sans mb-6 text-[#08090C] font-Inter">
@@ -241,6 +243,23 @@ function LoginPage() {
                                                 {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                             </button>
                                         </div>
+                                    </div>
+
+                                    <div className="flex items-start gap-2 mb-6">
+                                        <input
+                                            type="checkbox"
+                                            id="terms"
+                                            checked={agreeToTerms}
+                                            onChange={(e) => setAgreeToTerms(e.target.checked)}
+                                            disabled={isLoading}
+                                            className="mt-1 w-4 h-4 rounded border-gray-300 text-[#1F4FB6] focus:ring-2 focus:ring-[#1F4FB6] cursor-pointer"
+                                        />
+                                        <label htmlFor="terms" className="text-sm text-[#4A5874] cursor-pointer">
+                                            I agree to the{' '}
+                                            <a href="#" className="text-[#1F4FB6] hover:underline font-semibold">
+                                                Terms & Conditions
+                                            </a>
+                                        </label>
                                     </div>
 
                                     <button
